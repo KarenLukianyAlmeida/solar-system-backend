@@ -16,9 +16,12 @@ async function readMissionsData() {
 async function writeNewMissionData(newMission) {
     try {
         const oldMissions = await readMissionsData();
-        const allMissions = JSON.stringify([...oldMissions, newMission]);
+        const allMissions = JSON.stringify([
+            ...oldMissions,
+            { id: Date.now(), ...newMission },
+        ]);
 
-        await fs.writeFile(path.resolve(__dirname, MISSION_DATA_PATH), allMissions)
+        await fs.writeFile(path.resolve(__dirname, MISSION_DATA_PATH), allMissions);
     } catch (error) {
         console.error(`Erro na escrita do arquivo: ${error}`);
     }
@@ -26,5 +29,5 @@ async function writeNewMissionData(newMission) {
 
 module.exports = {
     readMissionsData,
-    writeNewMissionData
-}
+    writeNewMissionData,
+};
