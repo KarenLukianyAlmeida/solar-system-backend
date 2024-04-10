@@ -1,7 +1,44 @@
 const express = require('express');
+const {
+    readMissionsData,
+    writeNewMissionData,
+    updateMissionData,
+    deleteMissionData,
+} = require('./utils/fsUtils');
 
 const app = express();
 
-app.get('/', (req, res) => res.status(200).json({ message: 'Olá Mundo!' }));
+app.use(express.json());
+
+app.get('/missions', async (req, resp) => {
+    const missions = await readMissionsData();
+
+    return resp.status(200).json({ missions });
+});
+
+app.post('/missions', async (req, res) => {
+    const newMissions = req.body;
+
+    const newMissionWithId = await writeNewMissionData(newMissions);
+    return res.status(200).json({ mission: newMissionWithId });
+});
+
+app.put('/missions/:id', async (req, res) => {
+    const { id } = req.params;
+    const updatedMissionData = req.body;
+
+    console.log(updateMissionData);
+
+    const updatedMission = await updateMissionData(Number(id), updatedMissionData);
+
+    return res.status(201).json({ mission: updatedMission });
+});
+
+app.delete('/missions/:id', async (req, res) => {
+    const { id } = req.params;
+    await deleteMissionData(Number(id));
+
+    return res.status(204).end();
+});
 
 module.exports = app;
