@@ -27,11 +27,9 @@ app.put('/missions/:id', async (req, res) => {
     const { id } = req.params;
     const updatedMissionData = req.body;
 
-    console.log(updateMissionData);
-
     const updatedMission = await updateMissionData(Number(id), updatedMissionData);
 
-    return res.status(201).json({ mission: updatedMission });
+    return res.status(201).json({ mission: updatedMissionData });
 });
 
 app.delete('/missions/:id', async (req, res) => {
