@@ -27,7 +27,7 @@ app.put('/missions/:id', async (req, res) => {
     const { id } = req.params;
     const updatedMissionData = req.body;
 
-    const updatedMission = await updateMissionData(Number(id), updatedMissionData);
+    await updateMissionData(Number(id), updatedMissionData);
 
     return res.status(201).json({ mission: updatedMissionData });
 });
