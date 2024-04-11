@@ -10,13 +10,6 @@ async function main() {
     const newMission = { name, year, country, destination };
     writeNewMissionData(newMission);
     console.log('Deu certo!');
-    /* writeNewMissionData({
-            "id": 100,
-            "name": "Trybe 1",
-            "year": "2024",
-            "country": "Brasil",
-            "destination": "Vênus"
-    }) */
 }
 
 main();

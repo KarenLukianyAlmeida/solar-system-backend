@@ -10,10 +10,10 @@ const app = express();
 
 app.use(express.json());
 
-app.get('/missions', async (req, resp) => {
+app.get('/missions', async (req, res) => {
     const missions = await readMissionsData();
 
-    return resp.status(200).json({ missions });
+    return res.status(200).json({ missions });
 });
 
 app.post('/missions', async (req, res) => {
