@@ -39,6 +39,7 @@ async function updateMissionData(id, updatedMissionData) {
     try { 
         await fs.writeFile(path.resolve(__dirname, MISSION_DATA_PATH), updateData);
         console.log(`Atualizou missão com o id ${id}`);
+        return updateMission;
     } catch (err) {
         console.error(`Erro na escrita do arquivo: ${err}`);
     }
