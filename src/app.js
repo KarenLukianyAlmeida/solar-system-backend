@@ -70,7 +70,7 @@ app.delete('/missions/:id', validateMissionId, async (req, res) => {
 
 app.use((error, req, res, next) => {
     console.error(error.stack);
-    next();
+    next(error);
 });
 
 app.use((error, req, res, _next) => {
